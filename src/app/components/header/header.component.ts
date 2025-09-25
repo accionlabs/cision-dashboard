@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Search, Phone, Mail, Wifi, Users, ChevronDown } from 'lucide-angular';
+import { LucideAngularModule, Search, Phone, Mail, Signal, Users, ChevronDown } from 'lucide-angular';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ export class HeaderComponent {
   readonly Search = Search;
   readonly Phone = Phone;
   readonly Mail = Mail;
-  readonly Wifi = Wifi;
+  readonly Signal = Signal;
   readonly Users = Users;
   readonly ChevronDown = ChevronDown;
 }
