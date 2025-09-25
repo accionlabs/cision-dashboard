@@ -1,0 +1,17 @@
+<div class="chart-container" style="height: 400px; padding: 20px;">
+  <ngx-charts-bar-horizontal-stacked
+    
+    [results]="chartData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [legendPosition]="legendPosition"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [scheme]="colorScheme"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)">
+  </ngx-charts-bar-horizontal-stacked>
+</div>

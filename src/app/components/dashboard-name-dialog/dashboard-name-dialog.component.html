@@ -1,0 +1,34 @@
+<div *ngIf="isVisible" class="dialog-overlay" (click)="handleBackdropClick($event)">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h3>Nouveau tableau de bord</h3>
+      <button class="dialog-close" (click)="handleCancel()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <form (ngSubmit)="handleSubmit($event)">
+      <div class="dialog-body">
+        <label for="dashboard-name">Nom du tableau de bord</label>
+        <input
+          id="dashboard-name"
+          type="text"
+          [(ngModel)]="name"
+          name="dashboardName"
+          placeholder="Entrez le nom du tableau de bord"
+          #nameInput
+          autofocus>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="dialog-btn cancel" (click)="handleCancel()">
+          Annuler
+        </button>
+        <button type="submit" class="dialog-btn confirm" [disabled]="isSubmitDisabled">
+          Créer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

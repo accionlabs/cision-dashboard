@@ -1,0 +1,190 @@
+.geographic-widget {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
+}
+
+.widget-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.widget-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.info-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.3s;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-btn:hover {
+  color: #00BCD4;
+  background-color: #f5f5f5;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.regions-visualization {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.regions-map {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+.leaflet-map {
+  width: 100%;
+  height: 350px;
+  min-height: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .regions-visualization {
+    flex-direction: column;
+  }
+
+  .regions-map {
+    flex: 1 1 100%;
+  }
+
+  .leaflet-map {
+    height: 250px;
+  }
+}
+
+/* Import Leaflet styles */
+@import url('leaflet/dist/leaflet.css');
+
+.regions-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.region-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 0;
+}
+
+.region-info {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.region-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.region-value {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.region-bar {
+  flex: 1;
+  height: 20px;
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.bar-fill:hover {
+  opacity: 0.8;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-gradient {
+  width: 150px;
+  height: 12px;
+  background: linear-gradient(
+    to right,
+    rgba(16, 185, 129, 0.1),
+    rgba(16, 185, 129, 0.3),
+    rgba(16, 185, 129, 0.6),
+    rgba(16, 185, 129, 1)
+  );
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.legend-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .regions-visualization {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .regions-map {
+    flex: none;
+  }
+
+  .region-info {
+    flex: 0 0 150px;
+  }
+}

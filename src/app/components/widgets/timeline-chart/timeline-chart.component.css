@@ -1,0 +1,79 @@
+.timeline-chart-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.chart-header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 12px;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  margin-bottom: 16px;
+}
+
+.chart-wrapper canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.chart-info {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 12px;
+}
+
+.chart-description {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .timeline-chart-container {
+    padding: 16px;
+  }
+
+  .chart-title {
+    font-size: 16px;
+  }
+
+  .chart-wrapper {
+    min-height: 250px;
+  }
+
+  .chart-description {
+    font-size: 12px;
+  }
+}
+
+/* Loading state */
+.chart-wrapper.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+}
+
+.chart-wrapper.loading::after {
+  content: 'Loading chart...';
+  color: #64748b;
+  font-size: 14px;
+}

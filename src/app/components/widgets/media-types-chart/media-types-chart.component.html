@@ -1,0 +1,22 @@
+<div class="chart-wrapper" style="height: 400px; padding: 10px;">
+  <ngx-charts-bar-horizontal
+    
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [showGridLines]="showGridLines"
+    [barPadding]="barPadding"
+    [roundDomains]="roundDomains"
+    [xAxisTickFormatting]="formatLabel"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)">
+  </ngx-charts-bar-horizontal>
+</div>

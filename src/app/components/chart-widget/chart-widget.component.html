@@ -1,0 +1,67 @@
+<div class="widget-wrapper">
+  <div class="widget-header">
+    <div class="widget-title">
+      <button
+        class="collapse-btn"
+        (click)="onToggleCollapse()"
+        [style.transform]="widget.isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)'"
+      >
+        <lucide-angular [img]="widget.isCollapsed ? ChevronDown : ChevronUp" size="16"></lucide-angular>
+      </button>
+      <h3>{{ widget.title }}</h3>
+    </div>
+    <div class="widget-controls">
+      <button class="widget-control" title="Aide">
+        <lucide-angular [img]="HelpCircle" size="14"></lucide-angular>
+      </button>
+      <button class="widget-control" title="Télécharger">
+        <lucide-angular [img]="Download" size="14"></lucide-angular>
+      </button>
+      <button class="widget-control" title="Copier">
+        <lucide-angular [img]="Copy" size="14"></lucide-angular>
+      </button>
+      <button class="widget-control" title="Plein écran">
+        <lucide-angular [img]="Maximize2" size="14"></lucide-angular>
+      </button>
+      <button class="widget-control remove-btn" (click)="onRemove()" title="Fermer">
+        <lucide-angular [img]="X" size="14"></lucide-angular>
+      </button>
+    </div>
+  </div>
+  <div class="widget-body" *ngIf="!widget.isCollapsed">
+    <!-- WordCloud Widget -->
+    <app-word-cloud *ngIf="widget.type === 'wordcloud'"></app-word-cloud>
+
+    <!-- Sentiment Chart Widget -->
+    <app-sentiment-chart *ngIf="widget.type === 'sentiment'"></app-sentiment-chart>
+
+    <!-- Timeline Chart Widget -->
+    <app-timeline-chart *ngIf="widget.type === 'timeline'"></app-timeline-chart>
+
+    <!-- Media Types Chart Widget -->
+    <app-media-types-chart *ngIf="widget.type === 'media-types'"></app-media-types-chart>
+
+    <!-- Geographic Chart Widget -->
+    <app-geographic-chart *ngIf="widget.type === 'geographic'"></app-geographic-chart>
+
+    <!-- Themes Chart Widget -->
+    <app-themes-chart *ngIf="widget.type === 'themes'"></app-themes-chart>
+
+    <!-- Sources Chart Widget -->
+    <app-sources-chart *ngIf="widget.type === 'sources'"></app-sources-chart>
+
+    <!-- Placeholder for unknown types -->
+    <div class="chart-placeholder" *ngIf="!['wordcloud', 'sentiment', 'timeline', 'media-types', 'geographic', 'themes', 'sources'].includes(widget.type)">
+      <p>{{ widget.type }} - Type de graphique non reconnu</p>
+      <div class="placeholder-chart">
+        <svg width="100%" height="200" viewBox="0 0 400 200">
+          <rect x="10" y="160" width="30" height="30" fill="#2196F3" opacity="0.8"/>
+          <rect x="50" y="120" width="30" height="70" fill="#4CAF50" opacity="0.8"/>
+          <rect x="90" y="80" width="30" height="110" fill="#FF9800" opacity="0.8"/>
+          <rect x="130" y="100" width="30" height="90" fill="#F44336" opacity="0.8"/>
+          <rect x="170" y="140" width="30" height="50" fill="#9C27B0" opacity="0.8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

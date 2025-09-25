@@ -1,0 +1,138 @@
+<div class="dashboard">
+  <div class="dashboard-controls">
+    <div class="controls-left">
+      <div class="dropdown-wrapper">
+        <button
+          class="control-btn"
+          (click)="showPageDropdown = !showPageDropdown"
+        >
+          <lucide-angular [img]="Search" size="16"></lucide-angular>
+          <span>{{ currentPage?.name || 'Votre tableau de bord' }}</span>
+          <lucide-angular [img]="ChevronDown" size="16"></lucide-angular>
+        </button>
+        <div class="dropdown-menu" *ngIf="showPageDropdown">
+          <div
+            *ngFor="let page of dashboardPages"
+            [class]="'dropdown-item ' + (page.id === currentPageId ? 'active' : '')"
+            (click)="handleSelectPage(page.id)"
+          >
+            {{ page.name }}
+          </div>
+        </div>
+      </div>
+      <button class="action-btn green" (click)="openNameDialog()">
+        <lucide-angular [img]="Plus" size="16"></lucide-angular>
+        Créer un tableau de bord
+      </button>
+      <button class="action-btn green" (click)="openWidgetManager()">
+        <lucide-angular [img]="Plus" size="16"></lucide-angular>
+        Ajouter un widget
+      </button>
+    </div>
+    <div class="controls-right">
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Show welcome screen if no dashboards -->
+    <div class="welcome-screen" *ngIf="dashboardPages.length === 0">
+      <h2>Bienvenue sur votre tableau de bord</h2>
+      <p>Commencez par créer votre premier tableau de bord pour visualiser vos données.</p>
+      <button class="action-btn green large" (click)="openNameDialog()">
+        <lucide-angular [img]="Plus" size="20"></lucide-angular>
+        Créer votre premier tableau de bord
+      </button>
+    </div>
+
+    <!-- Dashboard content when pages exist -->
+    <ng-container *ngIf="dashboardPages.length > 0">
+      <div class="widget-area">
+        <!-- Dashboard tabs -->
+        <div class="widget-area-tabs">
+          <button
+            *ngFor="let page of dashboardPages"
+            [class]="'widget-tab ' + (page.id === currentPageId ? 'active' : '')"
+            (click)="currentPageId = page.id"
+          >
+            <span class="tab-text">{{ page.name }}</span>
+            <lucide-angular [img]="Settings" size="12" class="tab-settings-icon"></lucide-angular>
+          </button>
+          <button class="widget-settings-btn" (click)="openNameDialog()">
+            <lucide-angular [img]="Plus" size="14"></lucide-angular>
+          </button>
+        </div>
+
+        <!-- Tab content container -->
+        <div class="tab-content" *ngIf="currentPage">
+          <!-- Common filters for both tabs -->
+          <div class="widget-filters">
+            <div class="filter-group">
+              <label>Date</label>
+              <select class="filter-select">
+                <option>Entre le</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Du</label>
+              <input type="date" class="filter-date" value="2023-06-29" />
+            </div>
+            <div class="filter-group">
+              <label>Au</label>
+              <input type="date" class="filter-date" value="2023-09-29" />
+            </div>
+            <div class="filter-group">
+              <label>Mots-clés</label>
+              <input type="text" class="filter-input" placeholder="Filtrer par mot-clés" />
+              <button class="info-btn" title="Information">
+                <lucide-angular [img]="Info" size="14"></lucide-angular>
+              </button>
+            </div>
+            <div class="filter-group">
+              <label class="checkbox-label">
+                <input type="checkbox" />
+                <span>Titre uniquement</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Widgets content -->
+          <div class="widgets-render-area">
+            <ng-container *ngFor="let widget of currentWidgets">
+              <app-metric-card
+                *ngIf="isMetricWidget(widget)"
+                [widget]="widget"
+                (remove)="handleRemoveWidget($event)"
+              ></app-metric-card>
+              <app-chart-widget
+                *ngIf="!isMetricWidget(widget)"
+                [widget]="widget"
+                (toggleCollapse)="handleToggleCollapse($event)"
+                (remove)="handleRemoveWidget($event)"
+              ></app-chart-widget>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- CTA section at bottom -->
+    <div class="cta-section">
+      <p>Besoin d'aller plus loin dans votre analyse médias ? Notre équipe Insights peut vous accompagner dans vos projets de bilans de performance, études de marchés, synthèses de retombées médias ...</p>
+      <button class="cta-btn">Contactez-nous</button>
+    </div>
+  </div>
+
+  <!-- Widget Manager Modal -->
+  <app-widget-manager
+    [isVisible]="showWidgetManager"
+    (addWidget)="handleAddWidget($event)"
+    (close)="closeWidgetManager()"
+  ></app-widget-manager>
+
+  <!-- Dashboard Name Dialog -->
+  <app-dashboard-name-dialog
+    [isVisible]="showNameDialog"
+    (confirm)="handleCreateNewDashboard($event)"
+    (cancel)="closeNameDialog()"
+  ></app-dashboard-name-dialog>
+</div>

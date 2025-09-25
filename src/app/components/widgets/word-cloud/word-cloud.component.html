@@ -1,0 +1,8 @@
+<div class="wordcloud-container">
+  <span
+    *ngFor="let word of words; trackBy: trackByText"
+    class="word"
+    [ngStyle]="getWordStyle(word)">
+    {{ word.text }}
+  </span>
+</div>

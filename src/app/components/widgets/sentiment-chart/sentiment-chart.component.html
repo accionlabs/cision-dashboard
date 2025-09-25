@@ -1,0 +1,27 @@
+<div class="chart-container">
+  <svg width="300" height="300" class="pie-chart">
+    <g *ngFor="let arc of arcs; trackBy: trackByName">
+      <path
+        [attr.d]="createPath(arc)"
+        [attr.fill]="arc.color"
+        class="arc"
+      ></path>
+      <text
+        [attr.x]="getLabelPosition(arc).x"
+        [attr.y]="getLabelPosition(arc).y"
+        class="arc-label"
+        text-anchor="middle"
+        dominant-baseline="central"
+      >
+        {{ arc.value }}%
+      </text>
+    </g>
+  </svg>
+  <div class="legend">
+    <div *ngFor="let item of data; trackBy: trackByName" class="legend-item">
+      <span class="legend-color" [style.background-color]="item.color"></span>
+      <span class="legend-label">{{ item.name }}</span>
+      <span class="legend-value">{{ item.value }}%</span>
+    </div>
+  </div>
+</div>

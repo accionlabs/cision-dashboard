@@ -1,0 +1,161 @@
+.themes-widget {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
+}
+
+.widget-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.widget-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.info-btn {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.3s;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-btn:hover {
+  color: #00BCD4;
+  background-color: #f5f5f5;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chart-content {
+  display: flex;
+  gap: 20px;
+}
+
+.chart-labels {
+  flex: 0 0 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.theme-label {
+  font-size: 12px;
+  color: #666;
+  padding: 5px 0;
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.horizontal-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bar-row {
+  height: 25px;
+}
+
+.stacked-bar {
+  display: flex;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.bar-segment {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.bar-segment:hover {
+  opacity: 0.8;
+}
+
+.bar-segment:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.chart-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .chart-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .chart-labels {
+    flex: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .theme-label {
+    min-height: auto;
+    padding: 5px 10px;
+    background: #f8fafc;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+
+  .horizontal-bars {
+    gap: 10px;
+  }
+
+  .bar-row {
+    height: 20px;
+  }
+}
