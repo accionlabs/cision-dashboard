@@ -1,5 +1,5 @@
 .sidebar {
-  width: 70px;
+  width: 90px;
   background: #00607f;
   display: flex;
   flex-direction: column;
@@ -48,12 +48,12 @@
 }
 
 .nav-label {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 400;
   white-space: nowrap;
   margin-top: 5px;
   text-align: center;
   line-height: 1.2;
-  max-width: 60px;
+  max-width: 80px;
   word-wrap: break-word;
 }
