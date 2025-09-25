@@ -9,6 +9,10 @@
   min-height: 300px;
 }
 
+.widget-wrapper.collapsed {
+  min-height: auto;
+}
+
 .widget-wrapper:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
