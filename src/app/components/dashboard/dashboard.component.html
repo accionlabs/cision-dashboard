@@ -95,31 +95,41 @@
             </div>
           </div>
 
-          <!-- Widgets content -->
-          <div class="widgets-render-area">
-            <div *ngFor="let widget of currentWidgets; let i = index"
-                 class="widget-container"
-                 [style.grid-column]="'span ' + widget.gridCols"
-                 [style.grid-row]="'span ' + widget.gridRows">
-              <app-metric-card
-                *ngIf="isMetricWidget(widget)"
-                [widget]="widget"
-                [canMoveUp]="i > 0"
-                [canMoveDown]="i < currentWidgets.length - 1"
-                (moveUp)="handleMoveWidget(i, i - 1)"
-                (moveDown)="handleMoveWidget(i, i + 1)"
-                (remove)="handleRemoveWidget($event)"
-              ></app-metric-card>
-              <app-chart-widget
-                *ngIf="!isMetricWidget(widget)"
-                [widget]="widget"
-                [canMoveUp]="i > 0"
-                [canMoveDown]="i < currentWidgets.length - 1"
-                (moveUp)="handleMoveWidget(i, i - 1)"
-                (moveDown)="handleMoveWidget(i, i + 1)"
-                (toggleCollapse)="handleToggleCollapse($event)"
-                (remove)="handleRemoveWidget($event)"
-              ></app-chart-widget>
+          <!-- Metric widgets area -->
+          <div class="metrics-area" *ngIf="currentMetricWidgets.length > 0">
+            <div class="metrics-container">
+              <div *ngFor="let widget of currentMetricWidgets; let i = index"
+                   class="metric-wrapper">
+                <app-metric-card
+                  [widget]="widget"
+                  [canMoveUp]="i > 0"
+                  [canMoveDown]="i < currentMetricWidgets.length - 1"
+                  (moveUp)="handleMoveMetricWidget(i, i - 1)"
+                  (moveDown)="handleMoveMetricWidget(i, i + 1)"
+                  (remove)="handleRemoveWidget($event)"
+                ></app-metric-card>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart widgets area -->
+          <div class="charts-area">
+            <div class="charts-render-area">
+              <div *ngFor="let widget of currentChartWidgets; let i = index"
+                   class="widget-container"
+                   [class.collapsed]="widget.isCollapsed"
+                   [style.grid-column]="'span ' + widget.gridCols"
+                   [style.grid-row]="widget.isCollapsed ? 'span 1' : 'span ' + widget.gridRows">
+                <app-chart-widget
+                  [widget]="widget"
+                  [canMoveUp]="i > 0"
+                  [canMoveDown]="i < currentChartWidgets.length - 1"
+                  (moveUp)="handleMoveChartWidget(i, i - 1)"
+                  (moveDown)="handleMoveChartWidget(i, i + 1)"
+                  (toggleCollapse)="handleToggleCollapse($event)"
+                  (remove)="handleRemoveWidget($event)"
+                ></app-chart-widget>
+              </div>
             </div>
           </div>
         </div>

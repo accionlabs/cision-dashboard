@@ -58,6 +58,14 @@ export class DashboardComponent implements OnInit {
     return widgetsArray;
   }
 
+  get currentMetricWidgets(): Widget[] {
+    return this.currentWidgets.filter(w => this.isMetricWidget(w));
+  }
+
+  get currentChartWidgets(): Widget[] {
+    return this.currentWidgets.filter(w => !this.isMetricWidget(w));
+  }
+
   handleMoveWidget(fromIndex: number, toIndex: number) {
     if (toIndex < 0 || toIndex >= this.currentWidgets.length) return;
 
@@ -72,6 +80,34 @@ export class DashboardComponent implements OnInit {
         originalWidget.order = index;
       }
     });
+  }
+
+  handleMoveMetricWidget(fromIndex: number, toIndex: number) {
+    const metricWidgets = this.currentMetricWidgets;
+    if (toIndex < 0 || toIndex >= metricWidgets.length) return;
+
+    // Get the widget being moved
+    const movedWidget = metricWidgets[fromIndex];
+    const targetWidget = metricWidgets[toIndex];
+
+    // Swap their order values
+    const tempOrder = movedWidget.order;
+    movedWidget.order = targetWidget.order;
+    targetWidget.order = tempOrder;
+  }
+
+  handleMoveChartWidget(fromIndex: number, toIndex: number) {
+    const chartWidgets = this.currentChartWidgets;
+    if (toIndex < 0 || toIndex >= chartWidgets.length) return;
+
+    // Get the widget being moved
+    const movedWidget = chartWidgets[fromIndex];
+    const targetWidget = chartWidgets[toIndex];
+
+    // Swap their order values
+    const tempOrder = movedWidget.order;
+    movedWidget.order = targetWidget.order;
+    targetWidget.order = tempOrder;
   }
 
   handleCreateNewDashboard(name: string) {
