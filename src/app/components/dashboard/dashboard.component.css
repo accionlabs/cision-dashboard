@@ -358,129 +358,108 @@
   flex-wrap: wrap;
 }
 
-/* Use CSS Grid for better responsive control */
+/* 12-column grid system */
 .widgets-render-area {
   display: grid;
+  grid-template-columns: repeat(12, 1fr);
   gap: 15px;
   padding: 20px;
   min-height: 400px;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  position: relative;
+  grid-auto-rows: minmax(150px, auto);
 }
 
-/* Let metric cards auto-size in the grid */
-.widgets-render-area .metric-card {
-  width: 100%;
-  min-width: 0;
+/* Grid item styling */
+.widget-container {
+  transition: transform 0.2s ease;
 }
 
-/* Chart widgets span more columns */
-.widgets-render-area app-chart-widget {
-  grid-column: span 2;
-  min-width: 0;
-  width: 100%;
-}
-
-.widgets-render-area .widget-wrapper {
+.widget-container > * {
   width: 100%;
   height: 100%;
 }
 
-/* Extra large screens (1800px+) - 8+ columns, charts span 3 */
-@media (min-width: 1800px) {
+/* Responsive grid adjustments */
+
+/* Extra large screens (1600px+) - 12 columns */
+@media (min-width: 1600px) {
   .widgets-render-area {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
-  .widgets-render-area app-chart-widget {
-    grid-column: span 3;
+    grid-template-columns: repeat(12, 1fr);
   }
 }
 
-/* Large screens (1400px-1799px) - 6 columns, charts span 2 */
-@media (min-width: 1400px) and (max-width: 1799px) {
+/* Large screens (1200px-1599px) - 8 columns */
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .widgets-render-area {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  /* Adjust widget spans for 8-column grid */
+  .widget-container[style*="grid-column: span 6"] {
+    grid-column: span 4 !important;
+  }
+  .widget-container[style*="grid-column: span 4"] {
+    grid-column: span 3 !important;
+  }
+  .widget-container[style*="grid-column: span 2"] {
+    grid-column: span 2 !important;
+  }
+}
+
+/* Medium screens (992px-1199px) - 6 columns */
+@media (min-width: 992px) and (max-width: 1199px) {
   .widgets-render-area {
     grid-template-columns: repeat(6, 1fr);
   }
-  .widgets-render-area app-chart-widget {
-    grid-column: span 2;
+
+  /* Adjust widget spans for 6-column grid */
+  .widget-container[style*="grid-column: span 6"],
+  .widget-container[style*="grid-column: span 4"] {
+    grid-column: span 3 !important;
+  }
+  .widget-container[style*="grid-column: span 2"] {
+    grid-column: span 2 !important;
   }
 }
 
-/* Medium-large screens (1200px-1399px) - 5 columns, charts span 2 */
-@media (min-width: 1200px) and (max-width: 1399px) {
-  .widgets-render-area {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .widgets-render-area app-chart-widget {
-    grid-column: span 2;
-  }
-}
-
-/* Medium screens (992px-1199px) - 4 columns, charts span 2 */
-@media (min-width: 992px) and (max-width: 1199px) {
+/* Small screens (768px-991px) - 4 columns */
+@media (min-width: 768px) and (max-width: 991px) {
   .widgets-render-area {
     grid-template-columns: repeat(4, 1fr);
   }
-  .widgets-render-area app-chart-widget {
-    grid-column: span 2;
+
+  /* Adjust widget spans for 4-column grid */
+  .widget-container[style*="grid-column: span 6"],
+  .widget-container[style*="grid-column: span 4"] {
+    grid-column: span 4 !important;
+  }
+  .widget-container[style*="grid-column: span 2"] {
+    grid-column: span 2 !important;
   }
 }
 
-/* Small-medium screens (768px-991px) - 3 columns, charts span 2 */
-@media (min-width: 768px) and (max-width: 991px) {
-  .widgets-render-area {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .widgets-render-area app-chart-widget {
-    grid-column: span 2;
-  }
-}
-
-/* Tablet screens (576px-767px) - flexible grid for metrics, full width charts */
+/* Extra small screens (576px-767px) - 2 columns */
 @media (min-width: 576px) and (max-width: 767px) {
   .widgets-render-area {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    padding: 15px;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Chart widgets take full row width */
-  .widgets-render-area app-chart-widget {
-    grid-column: 1 / -1;
+  /* All widgets span full width on 2-column grid */
+  .widget-container {
+    grid-column: span 2 !important;
   }
 }
 
-/* Mobile screens (480px-575px) - 2 columns for metrics, full width charts */
-@media (min-width: 480px) and (max-width: 575px) {
+/* Mobile screens (below 576px) - 1 column */
+@media (max-width: 575px) {
   .widgets-render-area {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 10px;
-    gap: 10px;
+    grid-template-columns: 1fr;
   }
 
-  /* Chart widgets take full row width */
-  .widgets-render-area app-chart-widget {
-    grid-column: 1 / -1;
-  }
-
-  .widget-area {
-    margin: 10px;
-  }
-
-  .dashboard-controls {
-    padding: 10px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .controls-left,
-  .controls-right {
-    flex-wrap: wrap;
-    width: 100%;
-  }
-
-  .widget-filters {
-    padding: 10px;
+  /* All widgets span full width on mobile */
+  .widget-container {
+    grid-column: span 1 !important;
   }
 }
 
@@ -683,3 +662,4 @@
     font-size: 14px;
   }
 }
+

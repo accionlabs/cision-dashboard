@@ -52,9 +52,26 @@ export class DashboardComponent implements OnInit {
   get currentWidgets(): Widget[] {
     const page = this.currentPage;
     if (!page) return [];
-    return this.widgets
+    const widgetsArray = this.widgets
       .filter(w => page.widgets.includes(w.id) && w.isVisible)
       .sort((a, b) => a.order - b.order);
+    return widgetsArray;
+  }
+
+  handleMoveWidget(fromIndex: number, toIndex: number) {
+    if (toIndex < 0 || toIndex >= this.currentWidgets.length) return;
+
+    const widgets = [...this.currentWidgets];
+    const [movedWidget] = widgets.splice(fromIndex, 1);
+    widgets.splice(toIndex, 0, movedWidget);
+
+    // Update the order property of each widget
+    widgets.forEach((widget, index) => {
+      const originalWidget = this.widgets.find(w => w.id === widget.id);
+      if (originalWidget) {
+        originalWidget.order = index;
+      }
+    });
   }
 
   handleCreateNewDashboard(name: string) {

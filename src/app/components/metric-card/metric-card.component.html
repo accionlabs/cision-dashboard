@@ -5,6 +5,20 @@
     </div>
     <div class="metric-controls">
       <button
+        class="metric-control"
+        *ngIf="canMoveUp"
+        (click)="onMoveUp()"
+        title="Déplacer vers la gauche">
+        <lucide-icon [img]="icons.ArrowLeft" [size]="14"></lucide-icon>
+      </button>
+      <button
+        class="metric-control"
+        *ngIf="canMoveDown"
+        (click)="onMoveDown()"
+        title="Déplacer vers la droite">
+        <lucide-icon [img]="icons.ArrowRight" [size]="14"></lucide-icon>
+      </button>
+      <button
         class="metric-control remove-btn"
         (click)="onRemove()"
         title="Fermer">

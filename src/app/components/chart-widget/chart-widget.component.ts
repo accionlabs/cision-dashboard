@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, HelpCircle, Download, Copy, Maximize2, X, ChevronUp, ChevronDown } from 'lucide-angular';
+import { LucideAngularModule, HelpCircle, Download, Copy, Maximize2, X, ChevronUp, ChevronDown, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { Widget } from '../../models/widget.model';
 import { WordCloudComponent } from '../widgets/word-cloud/word-cloud.component';
 import { SentimentChartComponent } from '../widgets/sentiment-chart/sentiment-chart.component';
@@ -28,8 +28,12 @@ import { SourcesChartComponent } from '../widgets/sources-chart/sources-chart.co
 })
 export class ChartWidgetComponent {
   @Input() widget!: Widget;
+  @Input() canMoveUp: boolean = false;
+  @Input() canMoveDown: boolean = false;
   @Output() toggleCollapse = new EventEmitter<string>();
   @Output() remove = new EventEmitter<string>();
+  @Output() moveUp = new EventEmitter<void>();
+  @Output() moveDown = new EventEmitter<void>();
 
   // Lucide icons
   readonly HelpCircle = HelpCircle;
@@ -39,6 +43,8 @@ export class ChartWidgetComponent {
   readonly X = X;
   readonly ChevronUp = ChevronUp;
   readonly ChevronDown = ChevronDown;
+  readonly ArrowLeft = ArrowLeft;
+  readonly ArrowRight = ArrowRight;
 
   onToggleCollapse(): void {
     this.toggleCollapse.emit(this.widget.id);
@@ -46,5 +52,13 @@ export class ChartWidgetComponent {
 
   onRemove(): void {
     this.remove.emit(this.widget.id);
+  }
+
+  onMoveUp(): void {
+    this.moveUp.emit();
+  }
+
+  onMoveDown(): void {
+    this.moveDown.emit();
   }
 }

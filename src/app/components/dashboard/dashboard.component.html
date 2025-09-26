@@ -97,19 +97,30 @@
 
           <!-- Widgets content -->
           <div class="widgets-render-area">
-            <ng-container *ngFor="let widget of currentWidgets">
+            <div *ngFor="let widget of currentWidgets; let i = index"
+                 class="widget-container"
+                 [style.grid-column]="'span ' + widget.gridCols"
+                 [style.grid-row]="'span ' + widget.gridRows">
               <app-metric-card
                 *ngIf="isMetricWidget(widget)"
                 [widget]="widget"
+                [canMoveUp]="i > 0"
+                [canMoveDown]="i < currentWidgets.length - 1"
+                (moveUp)="handleMoveWidget(i, i - 1)"
+                (moveDown)="handleMoveWidget(i, i + 1)"
                 (remove)="handleRemoveWidget($event)"
               ></app-metric-card>
               <app-chart-widget
                 *ngIf="!isMetricWidget(widget)"
                 [widget]="widget"
+                [canMoveUp]="i > 0"
+                [canMoveDown]="i < currentWidgets.length - 1"
+                (moveUp)="handleMoveWidget(i, i - 1)"
+                (moveDown)="handleMoveWidget(i, i + 1)"
                 (toggleCollapse)="handleToggleCollapse($event)"
                 (remove)="handleRemoveWidget($event)"
               ></app-chart-widget>
-            </ng-container>
+            </div>
           </div>
         </div>
       </div>

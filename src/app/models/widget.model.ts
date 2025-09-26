@@ -6,6 +6,10 @@ export interface Widget {
   isVisible: boolean;
   isCollapsed: boolean;
   config?: Record<string, any>;
+  gridCols: number;
+  gridRows: number;
+  gridX?: number;
+  gridY?: number;
 }
 
 export type MetricType = 'retombees' | 'supports' | 'pages' | 'temps' | 'valeur' | 'occasions';

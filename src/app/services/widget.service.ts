@@ -31,14 +31,32 @@ export class WidgetService {
     if (type.startsWith('metric-')) {
       const metricType = type.replace('metric-', '');
       const metricConfigs: Record<string, any> = {
-        'retombees': { value: '0', label: 'retombées', color: '#2196F3' },
-        'supports': { value: '0', label: 'supports', color: '#2196F3' },
-        'pages': { value: '0', unit: 'millions', label: 'pages surface', color: '#2196F3' },
-        'temps': { value: '0h00', label: "temps d'antenne", color: '#2196F3' },
-        'valeur': { value: '0', unit: 'milliards', label: 'valeur média', color: '#2196F3' },
-        'occasions': { value: '0', label: 'occasions de voir', color: '#2196F3' }
+        'retombees': { value: '2,847', label: 'retombées', color: '#2196F3' },
+        'supports': { value: '1,423', label: 'supports', color: '#2196F3' },
+        'pages': { value: '3.2', unit: 'millions', label: 'pages surface', color: '#2196F3' },
+        'temps': { value: '14h32', label: "temps d'antenne", color: '#2196F3' },
+        'valeur': { value: '1.8', unit: 'milliards', label: 'valeur média', color: '#2196F3' },
+        'occasions': { value: '425K', label: 'occasions de voir', color: '#2196F3' }
       };
       config = metricConfigs[metricType] || {};
+    }
+
+    // Set grid dimensions based on widget type
+    let gridCols = 4; // Default to 4 columns (1/3 of 12-column grid)
+    let gridRows = 1;
+
+    if (type.startsWith('metric-')) {
+      gridCols = 2; // Metric widgets are smaller
+      gridRows = 1;
+    } else if (type === 'timeline' || type === 'geographic') {
+      gridCols = 6; // Timeline and map are wider
+      gridRows = 2;
+    } else if (type === 'wordcloud' || type === 'themes' || type === 'sources') {
+      gridCols = 4;
+      gridRows = 2;
+    } else {
+      gridCols = 4; // Default chart widgets
+      gridRows = 2;
     }
 
     return {
@@ -48,7 +66,9 @@ export class WidgetService {
       order: Date.now(),
       isVisible: true,
       isCollapsed: false,
-      config
+      config,
+      gridCols,
+      gridRows
     };
   }
 

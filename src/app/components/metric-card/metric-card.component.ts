@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, TrendingUp, FileText, Edit, Clock, Euro, Eye, X } from 'lucide-angular';
+import { LucideAngularModule, TrendingUp, FileText, Edit, Clock, Euro, Eye, X, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { Widget } from '../../models/widget.model';
 
 @Component({
@@ -11,7 +11,11 @@ import { Widget } from '../../models/widget.model';
 })
 export class MetricCardComponent {
   @Input() widget!: Widget;
+  @Input() canMoveUp: boolean = false;
+  @Input() canMoveDown: boolean = false;
   @Output() remove = new EventEmitter<string>();
+  @Output() moveUp = new EventEmitter<void>();
+  @Output() moveDown = new EventEmitter<void>();
 
   // Lucide icons for mapping
   readonly icons = {
@@ -21,7 +25,9 @@ export class MetricCardComponent {
     Clock,
     Euro,
     Eye,
-    X
+    X,
+    ArrowLeft,
+    ArrowRight
   };
 
   getIcon(label: string): any {
@@ -37,6 +43,14 @@ export class MetricCardComponent {
 
   onRemove(): void {
     this.remove.emit(this.widget.id);
+  }
+
+  onMoveUp(): void {
+    this.moveUp.emit();
+  }
+
+  onMoveDown(): void {
+    this.moveDown.emit();
   }
 
   get config() {
